@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiny Treasures Studio | Handcrafted Cute Creations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #ff8fa3;
+      --primary-dark: #e8637c;
+      --secondary: #b3c5ff;
+      --accent: #ffd166;
+      --bg-cream: #fff9f6;
+      --card-bg: #ffffff;
+      --text-main: #33272a;
+      --text-muted: #594a4e;
+      --radius: 20px;
+      --shadow: 0 10px 25px rgba(255, 143, 163, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px dashed #ffe3e3;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .logo i {
+      font-size: 1.8rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-dark);
+    }
+
+    .btn-ig {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: white !important;
+      padding: 8px 18px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-ig:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 50px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #ffe3e3;
+      color: var(--primary-dark);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      color: #2b1f23;
+    }
+
+    .hero h1 span {
+      color: var(--primary-dark);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 143, 163, 0.4);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Categories Filter */
+    .filter-section {
+      text-align: center;
+      margin: 40px 0 30px;
+    }
+
+    .filter-btn {
+      background: white;
+      border: 1px solid #ffd6dc;
+      padding: 8px 18px;
+      border-radius: 50px;
+      margin: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Products Showcase Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 25px;
+      margin-bottom: 70px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+      border: 1px solid #fff0f3;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card-img-wrap {
+      width: 100%;
+      height: 220px;
+      position: relative;
+      background-color: #f7f7f7;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge-cat {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 1.15rem;
+    }
+
+    .order-link {
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .order-link:hover {
+      text-decoration: underline;
+    }
+
+    /* How to Order / Custom Orders */
+    .steps {
+      background: white;
+      border-radius: var(--radius);
+      padding: 50px 30px;
+      margin-bottom: 70px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .steps h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+
+    .step-item i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .step-item h3 {
+      margin-bottom: 8px;
+    }
+
+    /* Footer */
+    footer {
+      background: #2b1f23;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    footer p {
+      color: #c9babb;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">
+          <i class="fa-solid fa-sparkles"></i>
+          Tiny Treasures Studio
+        </a>
+        <ul class="nav-links">
+          <li><a href="#creations">Creations</a></li>
+          <li><a href="#how-to-order">Custom Orders</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+        <a href="https://www.instagram.com/tiny.treasures_studio" target="_blank" class="btn-ig">
+          <i class="fa-brands fa-instagram"></i> Follow on IG
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-badge"><i class="fa-solid fa-heart"></i> 100% Handcrafted with Love</span>
+      <h1>Little Pieces of Joy,<br><span>Handmade Just For You.</span></h1>
+      <p>Custom resin charms, clay figurines, keychains, and aesthetic mini treasures designed to brighten your everyday life.</p>
+      <div class="hero-cta">
+        <a href="#creations" class="btn btn-primary">
+          <i class="fa-solid fa-bag-shopping"></i> Explore Collection
+        </a>
+        <a href="https://www.instagram.com/tiny.treasures_studio" target="_blank" class="btn btn-ig">
+          <i class="fa-brands fa-instagram"></i> DM for Inquiries
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery & Portfolio Section -->
+  <section id="creations" class="container">
+    <div class="filter-section">
+      <button class="filter-btn active" onclick="filterItems('all')">All</button>
+      <button class="filter-btn" onclick="filterItems('keychains')">Keychains</button>
+      <button class="filter-btn" onclick="filterItems('charms')">Charms</button>
+      <button class="filter-btn" onclick="filterItems('figurines')">Clay Miniatures</button>
+    </div>
+
+    <div class="grid" id="productGrid">
+      <!-- Item 1 -->
+      <div class="card" data-category="keychains">
+        <div class="card-img-wrap">
+          <span class="badge-cat">Keychain</span>
+          <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=500&auto=format&fit=crop" alt="Pastel Cloud Keychain">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Pastel Cloud Charm</h3>
+          <p class="card-desc">Soft pastel cloud with miniature dangling stars and pearls.</p>
+          <div class="card-footer">
+            <span class="price">$12.00</span>
+            <a href="https://ig.me/m/tiny.treasures_studio" target="_blank" class="order-link">
+              Order via DM <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="card" data-category="figurines">
+        <div class="card-img-wrap">
+          <span class="badge-cat">Miniature</span>
+          <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500&auto=format&fit=crop" alt="Matcha Frog Figurine">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Matcha Froggy Figurine</h3>
+          <p class="card-desc">Hand-sculpted clay frog resting on a tiny sculpted lily pad.</p>
+          <div class="card-footer">
+            <span class="price">$18.00</span>
+            <a href="https://ig.me/m/tiny.treasures_studio" target="_blank" class="order-link">
+              Order via DM <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="card" data-category="charms">
+        <div class="card-img-wrap">
+          <span class="badge-cat">Charm</span>
+          <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&auto=format&fit=crop" alt="Strawberry Resin Bead">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Strawberry Phone Charm</h3>
+          <p class="card-desc">Beaded wristlet charm with hand-painted mini strawberries.</p>
+          <div class="card-footer">
+            <span class="price">$14.00</span>
+            <a href="https://ig.me/m/tiny.treasures_studio" target="_blank" class="order-link">
+              Order via DM <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="card" data-category="keychains">
+        <div class="card-img-wrap">
+          <span class="badge-cat">Keychain</span>
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&auto=format&fit=crop" alt="Floral Letter Keychain">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Custom Initial Letter</h3>
+          <p class="card-desc">Personalized initial resin keychain filled with dried baby's breath.</p>
+          <div class="card-footer">
+            <span class="price">$15.00</span>
+            <a href="https://ig.me/m/tiny.treasures_studio" target="_blank" class="order-link">
+              Order via DM <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Order -->
+  <section id="how-to-order" class="container">
+    <div class="steps">
+      <h2>How Custom Orders Work</h2>
+      <div class="step-grid">
+        <div class="step-item">
+          <i class="fa-brands fa-instagram"></i>
+          <h3>1. Send a DM</h3>
+          <p>Message us on Instagram with screenshot(s) or reference photos of what you'd like.</p>
+        </div>
+        <div class="step-item">
+          <i class="fa-solid fa-palette"></i>
+          <h3>2. Customize</h3>
+          <p>Pick your colors, initials, glitters, and specific finish details.</p>
+        </div>
+        <div class="step-item">
+          <i class="fa-solid fa-gift"></i>
+          <h3>3. Handcrafted & Shipped</h3>
+          <p>We create your one-of-a-kind treasure, pack it safely, and ship it out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <h3>Tiny Treasures Studio</h3>
+      <p>Handmade arts & accessories crafted with passion.</p>
+      <p style="margin-top: 15px;">
+        <a href="https://www.instagram.com/tiny.treasures_studio" target="_blank" style="color: #ff8fa3;">
+          @tiny.treasures_studio
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Script for Filtering -->
+  <script>
+    function filterItems(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('#productGrid .card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
